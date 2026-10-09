@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Smart College Assistant</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #fdf2f8, #ecfeff);
+            color: #1e293b;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            height: 75px;
+            padding: 0 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
+            color: white;
+
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .student {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        /* MAIN */
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 45px auto;
+        }
+
+        /* WELCOME */
+        .welcome {
+            position: relative;
+            overflow: hidden;
+
+            padding: 40px;
+            border-radius: 25px;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #6366f1,
+                #8b5cf6,
+                #ec4899
+            );
+
+            color: white;
+
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.25);
+
+            margin-bottom: 35px;
+        }
+
+        .welcome::after {
+            content: "";
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            background: rgba(255,255,255,0.12);
+
+            border-radius: 50%;
+
+            right: -60px;
+            top: -70px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 27px;
+            color: #312e81;
+        }
+
+        .section-title p {
+            margin-top: 6px;
+            color: #64748b;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            transition: all 0.3s ease;
+
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+
+            box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+        }
+
+        /* ICON */
+        .icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 20px;
+
+            font-size: 36px;
+        }
+
+        /* Individual colors */
+        .chatbot .icon {
+            background: #ede9fe;
+        }
+
+        .notice .icon {
+            background: #fef3c7;
+        }
+
+        .timetable .icon {
+            background: #dbeafe;
+        }
+
+        .assignment .icon {
+            background: #fce7f3;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #64748b;
+        }
+
+        /* BUTTON */
+        .card button {
+            margin-top: 18px;
+
+            border: none;
+
+            padding: 10px 20px;
+
+            border-radius: 20px;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .chatbot button {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        .notice button {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+        }
+
+        .timetable button {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+        }
+
+        .assignment button {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+        }
+
+        .card button:hover {
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 55px;
+            padding: 25px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .student {
+                display: none;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .welcome {
+                padding: 30px 25px;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Smart College Assistant
+        </div>
+
+        <div class="student">
+            🎓 Student Dashboard
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h1>
+                Hello, {{ user.first_name }}! 👋
+            </h1>
+
+            <p>
+                Welcome to your smart college assistant.
+                Access your academic information quickly and easily.
+            </p>
+
+        </section>
+
+
+        <!-- SECTION -->
+
+        <div class="section-title">
+
+            <h2>Student Services</h2>
+
+            <p>
+                Everything you need in one place
+            </p>
+
+        </div>
+
+
+        <!-- CARDS -->
+
+        <div class="cards">
+
+
+            <!-- CHATBOT -->
+
+            <div class="card chatbot">
+
+                <div class="icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Chatbot
+                </h3>
+
+                <p>
+                    Ask questions and get quick answers
+                    using our intelligent AI assistant.
+                </p>
+
+                <button>
+                    Open Chatbot
+                </button>
+
+            </div>
+
+
+            <!-- NOTICES -->
+
+            <div class="card notice">
+
+                <div class="icon">
+                    📢
+                </div>
+
+                <h3>
+                    College Notices
+                </h3>
+
+                <p>
+                    Stay updated with the latest
+                    college announcements and notices.
+                </p>
+
+                <button>
+                    View Notices
+                </button>
+
+            </div>
+
+
+            <!-- TIMETABLE -->
+
+            <div class="card timetable">
+
+                <div class="icon">
+                    📅
+                </div>
+
+                <h3>
+                    Timetable
+                </h3>
+
+                <p>
+                    Check your daily classes and
+                    college timetable easily.
+                </p>
+
+                <button>
+                    View Timetable
+                </button>
+
+            </div>
+
+
+            <!-- ASSIGNMENTS -->
+
+            <div class="card assignment">
+
+                <div class="icon">
+                    📝
+                </div>
+
+                <h3>
+                    Assignments
+                </h3>
+
+                <p>
+                    View assignments, deadlines
+                    and submission information.
+                </p>
+
+                <button>
+                    View Assignments
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 AI Smart College Assistant
+        <br>
+        Smart • Simple • Student Friendly 🎓
+
+    </footer>
+
+
+</body>
+
+</html>
